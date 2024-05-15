@@ -1,6 +1,7 @@
-using Microsoft.AspNetCore.Http.HttpResults;
-
 namespace allspice.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
 
 public class RecipesController : ControllerBase
 {

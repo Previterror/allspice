@@ -25,7 +25,7 @@ public class RecipesRepository
 
         SELECT
         recipes.*,
-        accounts.*,
+        accounts.*
         FROM recipes
         JOIN accounts ON recipes.creatorId = accounts.id
         WHERE recipes.id = LAST_INSERT_ID();";

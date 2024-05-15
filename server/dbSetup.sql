@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS accounts (
     picture varchar(255) COMMENT 'User Picture'
 ) default charset utf8mb4 COMMENT '';
 
-CREATE TABLE Recipes (
+CREATE TABLE recipes (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -24,3 +24,5 @@ CREATE TABLE Recipes (
     creatorId VARCHAR(255) NOT NULL,
     FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
 )
+
+DROP TABLE recipes;
