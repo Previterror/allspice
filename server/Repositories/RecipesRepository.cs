@@ -1,6 +1,8 @@
 
 
 
+
+
 namespace allspice.Repositories;
 
 public class RecipesRepository
@@ -62,5 +64,33 @@ public class RecipesRepository
 
         Recipe recipe = _db.Query<Recipe, Profile, Recipe>(sql, PopulateCreator, new { recipeId }).FirstOrDefault();
         return recipe;
+    }
+
+    internal Recipe UpdateRecipe(Recipe recipeToUpdate)
+    {
+        string sql = @"
+        UPDATE recipes
+        SET
+        title = @Title,
+        instructions = @Instructions,
+        img = @img,
+        category = @category
+        WHERE id = @Id;
+
+        SELECT
+        recipes.*,
+        accounts.*
+        FROM recipes
+        JOIN accounts ON accounts.id = recipes.creatorId
+        WHERE recipes.id = @Id;";
+
+        Recipe recipe = _db.Query<Recipe, Profile, Recipe>(sql, PopulateCreator, recipeToUpdate).FirstOrDefault();
+        return recipe;
+    }
+
+    internal void RemoveRecipe(int recipeId)
+    {
+        string sql = " DELETE FROM recipes WHERE id = @recipeId;";
+        _db.Execute(sql, new { recipeId });
     }
 }
