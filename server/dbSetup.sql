@@ -8,20 +8,19 @@ CREATE TABLE IF NOT EXISTS accounts (
 ) default charset utf8mb4 COMMENT '';
 
 CREATE TABLE Recipes (
-    id INT NOT NULL PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     title VARCHAR(255) NOT NULL,
     instructions VARCHAR(5000) NOT NULL,
     img VARCHAR(1000) NOT NULL,
     category ENUM(
-      "breakfast",
-      "lunch",
-      "dinner",
-      "snack",
-      "dessert"
-    )
-    creatorId VARCHAR(255)
-
-
-) 
+        "breakfast",
+        "lunch",
+        "dinner",
+        "snack",
+        "dessert"
+    ),
+    creatorId VARCHAR(255) NOT NULL,
+    FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+)

@@ -1,5 +1,3 @@
-using System.Runtime;
-
 namespace allspice.Models;
 
 public class Recipe : RepoItem<int>
