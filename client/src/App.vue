@@ -1,20 +1,16 @@
 <script setup>
-import { AppState } from './AppState'
-import Navbar from './components/Navbar.vue'
+import Login from './components/Login.vue';
 
 
 </script>
 
 <template>
-  <header>
-    <Navbar />
+  <header class="d-flex justify-content-end bg-dark mx-5 my-3 p-2">
+    <Login />
   </header>
   <main>
     <router-view />
   </main>
-  <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
-  </footer>
 </template>
 
 <style lang="scss">
