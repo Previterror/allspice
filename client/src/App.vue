@@ -21,9 +21,11 @@ import Login from './components/Login.vue';
 }
 
 
-footer {
-  display: grid;
-  place-content: center;
-  height: 32px;
+header {
+  background-image: url(https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=2524&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  object-fit: cover;
+  object-position: right 10% bottom 10%;
+  height: 30vh;
+  border-radius: .25em;
 }
 </style>
