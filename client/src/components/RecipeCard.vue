@@ -21,8 +21,9 @@ async function toggleFavorite() {
     try {
         if (isFavorite.value) {
             await favoritesService.removeFavorite(isFavorite.value.id)
+        } else {
+            await favoritesService.createFavorite(prop.recipe.id)
         }
-        await favoritesService.createFavorite(prop.recipe.id)
 
     } catch (error) {
         Pop.toast('Could not add favorite.', 'error')
