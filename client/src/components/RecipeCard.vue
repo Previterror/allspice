@@ -1,4 +1,33 @@
 <script setup>
+import { computed, ref } from 'vue';
+import { Recipe } from '../models/Recipe.js';
+import { AppState } from '../AppState.js';
+import { favoritesService } from '../services/FavoritesService.js';
+import Pop from '../utils/Pop.js';
+
+
+const prop = defineProps(
+    { recipe: { type: Recipe, required: true } }
+)
+
+const favorites = computed(() => AppState.userFavorites)
+
+const isFavorite = computed(() => AppState.userFavorites.find(favorite => favorite.recipeId == prop.recipe.id))
+
+const bgimg = computed(() => `url(${prop.recipe.img})`)
+
+
+async function toggleFavorite() {
+    try {
+        if (isFavorite.value) {
+            await favoritesService.removeFavorite(isFavorite.value.id)
+        }
+        await favoritesService.createFavorite(prop.recipe.id)
+
+    } catch (error) {
+        Pop.toast('Could not add favorite.', 'error')
+    }
+}
 
 </script>
 
@@ -7,14 +36,19 @@
     <div class="row recipecard shadow">
         <div class="col d-flex flex-column justify-content-between py-2">
             <div class="row px-2 justify-content-between">
-                <span
-                    class="bgglass rounded-pill text-light col-10 col-md-5 text-capitalize text-center p-2">breakfast</span>
-                <span class="col-1 me-2 text-danger "><i class="mdi mdi-heart bgglass p-1 rounded"></i></span>
+                <span class="bgglass rounded-pill text-light col-10 col-md-5 text-capitalize text-center p-2">
+                    {{ recipe.category }}
+                </span>
+                <span role="button" v-if="favorites" class="col-1 me-2 ">
+                    <i v-if="isFavorite" @click="toggleFavorite()"
+                        class="mdi mdi-heart bgglass p-1 rounded text-danger"></i>
+                    <i v-else @click="toggleFavorite()" class="mdi mdi-heart-outline bgglass p-1 rounded"></i>
+                </span>
             </div>
             <div class="row px-2">
                 <div class="bgglass rounded text-light col-12 p-2 text-capitalize">
-                    pumpkin
-                    soup</div>
+                    {{ recipe.title }}
+                </div>
             </div>
         </div>
     </div>
@@ -24,7 +58,7 @@
 
 <style lang="scss" scoped>
 .recipecard {
-    background-image: url(https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-image: v-bind(bgimg);
     background-position: center;
     background-size: cover;
     border-radius: 5px;

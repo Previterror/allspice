@@ -1,3 +1,5 @@
+import { AppState } from "../AppState.js"
+
 export class Recipe{
     constructor(data){
         this.id = data.id
