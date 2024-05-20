@@ -62,10 +62,10 @@ onMounted(
     </div>
   </div>
 
-  <div class="justify-content-end row">
-    <button type="button" class="btn btn-primary rounded-pill fixed-bottom ms-5 mb-5 col-1" data-bs-toggle="modal"
-      data-bs-target="#exampleModal">
-      <i class="mdi mdi-plus-outline"></i>
+  <div class="row">
+    <button type="button" class="btn ms-5 mb-5 createbutton bg-hero" data-bs-toggle="modal"
+      data-bs-target="#createModal">
+      <i class="mdi mdi-plus"></i>
     </button>
   </div>
   <CreateModal />
@@ -86,5 +86,17 @@ onMounted(
   font-family: pt-serif-regular;
   font-size: large;
   color: green;
+}
+
+.createbutton {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 100%;
+  width: 50px;
+  aspect-ratio: 1/1;
+  border-color: whitesmoke;
+  color: whitesmoke;
+  font-size: large;
 }
 </style>
