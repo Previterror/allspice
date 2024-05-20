@@ -22,8 +22,8 @@ class FavoritesService{
         console.error('Invalid favorite index')
         return 
        }
+        console.log('Removed', AppState.userFavorites[indexToRemove])
        AppState.userFavorites.splice(indexToRemove, 1)
-      //  console.log('Removed', indexToRemove)
   }
 
   async getFavorites() {

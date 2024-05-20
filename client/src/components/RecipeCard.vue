@@ -4,15 +4,17 @@ import { Recipe } from '../models/Recipe.js';
 import { AppState } from '../AppState.js';
 import { favoritesService } from '../services/FavoritesService.js';
 import Pop from '../utils/Pop.js';
+import { Favorite } from '../models/Favorite.js';
 
 
 const prop = defineProps(
-    { recipe: { type: Recipe, required: true } }
+    { recipe: { type: [Recipe, Favorite], required: true } }
 )
 
 const favorites = computed(() => AppState.userFavorites)
 
-const isFavorite = computed(() => AppState.userFavorites.find(favorite => favorite.recipeId == prop.recipe.id))
+// @ts-ignore
+const isFavorite = computed(() => AppState.userFavorites.find(favorite => favorite.recipeId == prop.recipe.id || prop.recipe.favoriteId))
 
 const bgimg = computed(() => `url(${prop.recipe.img})`)
 
@@ -37,7 +39,7 @@ async function toggleFavorite() {
     <div class="row recipecard shadow">
         <div class="col d-flex flex-column justify-content-between py-2">
             <div class="row px-2 justify-content-between">
-                <span class="bgglass rounded-pill text-light col-10 col-md-5 text-capitalize text-center p-2">
+                <span class="bgglass rounded-pill text-light col-12 col-md-5 text-capitalize text-center p-2">
                     {{ recipe.category }}
                 </span>
                 <span role="button" v-if="favorites" class="col-1 me-2 ">

@@ -1,6 +1,6 @@
 namespace allspice.Models;
 
-public class RepoItem<T>
+public abstract class RepoItem<T>
 {
     public T id { get; set; }
     public DateTime CreatedAt { get; set; }
