@@ -49,11 +49,13 @@ onMounted(
 
   <div class="row justify-content-center text-center filter">
     <div class="border shadow bg-light d-block d-md-flex justify-content-around p-0 filterinterior">
-      <span @click="filterBy = 'home'" class="text-capitalize col-12 col-md-4 selectable p-2 filterbuttons">home </span>
-      <span @click="filterBy = 'myrecipes'" class="text-capitalize col-12 col-md-4 selectable p-2 filterbuttons">my
+      <span @click="filterBy = 'home'" class="text-capitalize col-12 col-md-4 selectable p-2 filterbuttons"
+        :class="filterBy == 'home' ? 'selected' : 'unselected'">home</span>
+      <span @click="filterBy = 'myrecipes'" class="text-capitalize col-12 col-md-4 selectable p-2 filterbuttons"
+        :class="filterBy == 'myrecipes' ? 'selected' : 'unselected'">my
         recipes</span>
-      <span @click="filterBy = 'favorites'"
-        class="text-capitalize col-12 col-md-4 selectable p-2 filterbuttons">favorites</span>
+      <span @click="filterBy = 'favorites'" class="text-capitalize col-12 col-md-4 selectable p-2 filterbuttons"
+        :class="filterBy == 'favorites' ? 'selected' : 'unselected'">favorites</span>
     </div>
   </div>
   <div class="row justify-content-center justify-content-md-between">
@@ -98,5 +100,15 @@ onMounted(
   border-color: whitesmoke;
   color: whitesmoke;
   font-size: large;
+}
+
+.selected {
+  background-color: rgba(69, 100, 69, 0.45);
+  backdrop-filter: blur(20px);
+  color: white;
+}
+
+.unselected {
+  backdrop-filter: blur(20px);
 }
 </style>
