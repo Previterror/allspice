@@ -4,9 +4,8 @@ import { computed, onMounted, ref } from 'vue';
 import { recipesService } from '../services/RecipesService.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
-import { favoritesService } from '../services/FavoritesService.js';
-import App from '../App.vue';
-import { Recipe } from '../models/Recipe.js';
+import RecipeModal from '../components/RecipeModal.vue';
+import CreateModal from '../components/CreateModal.vue';
 
 const user = computed(() => AppState.account)
 
@@ -16,6 +15,16 @@ async function getRecipes() {
   }
   catch (error) {
     Pop.toast('Could not get recipes', 'error')
+    console.error(error)
+  }
+}
+
+async function setActiveRecipe(recipeId) {
+  try {
+    await recipesService.setActiveRecipe(recipeId)
+  }
+  catch (error) {
+    Pop.error(error);
     console.error(error)
   }
 }
@@ -59,7 +68,8 @@ onMounted(
     </div>
   </div>
   <div class="row justify-content-center justify-content-md-between">
-    <div v-for="recipe in recipes" :key="recipe.id" class="col-10 col-md-3 m-3">
+    <div role="button" v-for="recipe in recipes" :key="recipe.id" class="col-10 col-md-3 m-3" data-bs-toggle="modal"
+      data-bs-target="#recipeModal" @click="setActiveRecipe(recipe.id)">
       <RecipeCard :recipe="recipe" />
     </div>
   </div>
@@ -70,6 +80,7 @@ onMounted(
       <i class="mdi mdi-plus"></i>
     </button>
   </div>
+  <RecipeModal />
   <CreateModal />
 </template>
 
@@ -103,7 +114,7 @@ onMounted(
 }
 
 .selected {
-  background-color: rgba(69, 100, 69, 0.45);
+  background-color: rgba(129, 190, 129, 0.45);
   backdrop-filter: blur(20px);
   color: white;
 }

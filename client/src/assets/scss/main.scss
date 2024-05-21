@@ -25,3 +25,8 @@ main {
 a {
   text-decoration: none;
 }
+
+.bgglass {
+  background-color: rgba(112, 109, 109, 0.7);
+  backdrop-filter: blur(10px);
+}

@@ -68,9 +68,4 @@ async function toggleFavorite() {
     height: 25vh;
     font-weight: bold;
 }
-
-.bgglass {
-    background-color: rgba(112, 109, 109, 0.7);
-    backdrop-filter: blur(10px);
-}
 </style>

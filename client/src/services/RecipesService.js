@@ -4,6 +4,10 @@ import { Recipe } from "../models/Recipe.js"
 import { api } from "./AxiosService.js"
 
 class RecipesService {
+  setActiveRecipe(recipeId) {
+    const recipe = AppState.recipes.find(recipe => recipe.id == recipeId)
+    AppState.activeRecipe = recipe
+  }
   async createRecipe(createData) {
       const res = await api.post('api/recipes', createData)
       // console.log('create res', res.data);

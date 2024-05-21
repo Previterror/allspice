@@ -16,7 +16,7 @@ import Login from './components/Login.vue';
       </div>
     </div>
   </header>
-  <main class="container">
+  <main class="">
     <router-view />
   </main>
 </template>
