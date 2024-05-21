@@ -1,18 +1,28 @@
+<!-- eslint-disable no-console -->
 <script setup>
 import { ref } from 'vue';
 import Pop from '../utils/Pop.js';
 import { recipesService } from '../services/RecipesService.js';
+import { Modal } from 'bootstrap';
 
 async function createRecipe() {
     try {
-        await recipesService.createRecipe(createData)
+        // console.log('attempting to create', createData.value);
+        await recipesService.createRecipe(createData.value)
+        createData.value = {
+            title: '',
+            instructions: '',
+            img: '',
+            category: '',
+        }
+        Modal.getOrCreateInstance('#createModal').hide()
     }
     catch (error) {
         Pop.error(error);
     }
 }
 
-const createData = ref({
+let createData = ref({
     title: '',
     instructions: '',
     img: '',
@@ -59,8 +69,8 @@ const createData = ref({
                         </div>
 
                         <div class="d-flex justify-content-end mt-2">
-                            <span role="button" type="submit"
-                                class="bg-hero text-center text-light text-capitalize col-3">submit</span>
+                            <button role="button" type="submit"
+                                class="bg-hero text-center text-light text-capitalize col-3">submit</button>
                         </div>
                     </form>
                 </div>
