@@ -18,7 +18,7 @@ async function addIngredient() {
     try {
         ingrData.value.recipeId = recipe.value.id
         console.log('ingrData', ingrData.value);
-        await ingredientsService.addIngredient(ingrData)
+        await ingredientsService.addIngredient(ingrData.value)
     }
     catch (error) {
         Pop.error(error);
